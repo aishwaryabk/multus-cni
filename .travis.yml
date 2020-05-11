@@ -1,5 +1,4 @@
 os: linux
-arch: ppc64le
 language: go
 # see https://docs.travis-ci.com/user/reference/overview/#Virtualization-environments
 # for the detail
@@ -22,8 +21,10 @@ env:
     - DOCKER_CLI_EXPERIMENTAL="enabled"
     - secure: "${REGISTRY_SECURE}"
   jobs:
-    - TARGET=amd64
-    - TARGET=ppc64le
+    - arch: amd64
+      TARGET=amd64
+    - arch: ppc64le
+      TARGET=ppc64le
 
 before_install:
   - if [ "${REPOSITORY_NAME}" = "" ]; then export REPOSITORY_NAME=multus; fi
@@ -60,7 +61,7 @@ deploy:
     on:
       tags: true
       all_branches: true
-      condition: "$TARGET = amd64 && $TRAVIS_TAG =~ ^v[0-9].*$ && ! -z $GITHUB_TOKEN && $TRAVIS_OS_NAME = linux"
+      condition: "$TARGET = ppc64le && $TRAVIS_TAG =~ ^v[0-9].*$ && ! -z $GITHUB_TOKEN && $TRAVIS_OS_NAME = linux"
   # Push images to Dockerhub on tag
   - provider: script
     cleanup: false
