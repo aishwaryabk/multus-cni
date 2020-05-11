@@ -1,4 +1,5 @@
 os: linux
+arch: ppc64le
 language: go
 # see https://docs.travis-ci.com/user/reference/overview/#Virtualization-environments
 # for the detail
@@ -21,10 +22,8 @@ env:
     - DOCKER_CLI_EXPERIMENTAL="enabled"
     - secure: "${REGISTRY_SECURE}"
   jobs:
-    - arch: amd64
-      TARGET=amd64
-    - arch: ppc64le
-      TARGET=ppc64le
+    - TARGET=amd64
+    - TARGET=ppc64le
 
 before_install:
   - if [ "${REPOSITORY_NAME}" = "" ]; then export REPOSITORY_NAME=multus; fi
