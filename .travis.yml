@@ -43,7 +43,7 @@ before_script:
 script:
   - GOARCH="${TARGET}" ./build
   - |
-    if [ "${TARGET}" == "amd64" ]; then
+    if [ "${TARGET}" == "ppc64le" ]; then
       sudo env PATH=${PATH} ./test.sh
       goveralls -coverprofile=coverage.out -service=travis-ci
       docker build -t ${REPOSITORY_USER}/${REPOSITORY_NAME}:latest-amd64 .
